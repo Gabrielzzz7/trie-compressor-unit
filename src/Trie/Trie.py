@@ -62,18 +62,6 @@ class _trieNode:
         :return: O substring armazenado no nó.
         """
         return self.substring
-    
-    def MemoryUsage(self, detailed=False):
-        """
-        Retorna o uso de memória de um nó.
-
-        :param detailed: Se True, usa 'asizeof' para incluir referências indiretas.
-        :return: Memória usada em bytes.
-        """
-        if detailed:
-            return asizeof.asizeof(self)  
-        else:
-            return sys.getsizeof(self)
 
 class Trie:
     def __init__(self, detailedReturn = False):

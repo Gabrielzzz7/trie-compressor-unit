@@ -66,6 +66,15 @@ def test_should_save_bmp_file():
 
 def test_should_save_binary_file():
     file_name = 'content.zip'
+    create_temp_file (CONTENT_BITS, file_name)
+
+    FileManager.SaveBinaryFile(file_name, CONTENT_BITS)
+
+    assert os.path.exists(file_name)
+    remove_temp_file(file_name)
+    
+def test_should_read_binary_file():
+    file_name = 'content.zip'
     FileManager.SaveBinaryFile(file_name, CONTENT_BITS)
 
     content = FileManager.ReadBinaryFile(file_name)

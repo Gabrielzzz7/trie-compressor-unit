@@ -60,6 +60,15 @@ def test_should_save_bmp_file():
     FileManager.SaveTextFile(file_name, expected)
 
     content = FileManager.ReadFile(file_name)
-    
+
     remove_temp_file(file_name)
     assert content == expected
+
+def test_should_save_binary_file():
+    file_name = 'content.zip'
+    FileManager.SaveBinaryFile(file_name, CONTENT_BITS)
+
+    content = FileManager.ReadBinaryFile(file_name)
+
+    remove_temp_file(file_name)
+    assert content == CONTENT_BITS

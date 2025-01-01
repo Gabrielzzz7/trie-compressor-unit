@@ -46,3 +46,9 @@ def test_should_save_empty_file():
     
     assert os.path.exists(file_name)
     remove_temp_file(file_name)
+
+def test_should_read_bmp_file():
+    expected = FileManager.ReadFile('tests/files/arcane-expected.txt')
+    content = FileManager.ReadFile('tests/files/arcane.bmp')
+
+    assert content == expected

@@ -29,7 +29,12 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install -r requirements.txt
+          if [[ $RUNNER_OS != "Windows" ]]; then
+            pip install -r requirements.txt
+          else
+            # Exclude 'memray' from installation on Windows
+            pip install $(grep -v 'memray' requirements.txt)
+
 
       - name: Run tests with coverage check
         run: |

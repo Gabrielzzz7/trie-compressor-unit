@@ -32,9 +32,8 @@ jobs:
           if [[ $RUNNER_OS != "Windows" ]]; then
             pip install -r requirements.txt
           else
-            # Exclude 'memray' from installation on Windows
             pip install $(grep -v 'memray' requirements.txt)
-
+          fi
 
       - name: Run tests with coverage check
         run: |

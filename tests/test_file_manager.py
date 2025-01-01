@@ -52,3 +52,14 @@ def test_should_read_bmp_file():
     content = FileManager.ReadFile('tests/files/arcane.bmp')
 
     assert content == expected
+
+def test_should_save_bmp_file():
+    expected = FileManager.ReadFile('tests/files/arcane.bmp')
+
+    file_name = 'content.bmp'
+    FileManager.SaveTextFile(file_name, expected)
+
+    content = FileManager.ReadFile(file_name)
+    
+    remove_temp_file(file_name)
+    assert content == expected

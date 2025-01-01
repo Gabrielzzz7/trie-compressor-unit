@@ -1,6 +1,8 @@
+import os
 from FileManager.FileManager import FileManager
 import pytest # type: ignore
 from LZW.Compressor import LZWCompressor
+from tests.helpers.file_manager_helpers import remove_temp_file
 
 # Variáveis de controle
 SIGMA_SIZE = 256
@@ -73,3 +75,12 @@ def test_compressing_dynamic_code_lenght_set_right_code_lenght_14_bits():
     result = compressor.Compress(content)
     code_control_bits, _ = LZWCompressor.ExtractCodeLenghtAndContent(result, CODE_CONTROL_BITS)
     assert code_control_bits == 14
+
+def test_decompressor_with_enabled_statatistics():
+    compressor = LZWCompressor(SIGMA_SIZE, CODE_CONTROL_BITS, DEFAULT_CODE_BITS, DEFAULT_CODE_BITS, enableStatistics=True)
+    content = "Em Algoritmos II \n , falhar nos testes não é o fim"
+    result = compressor.Compress(content)
+
+    file_name = 'compressed-statistics.csv'
+    assert os.path.exists(file_name)
+    remove_temp_file(file_name)

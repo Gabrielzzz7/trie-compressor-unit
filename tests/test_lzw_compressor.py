@@ -62,6 +62,9 @@ def test_extract_code_control_bits_compressing():
     code_control_bits, _ = LZWCompressor.ExtractCodeLenghtAndContent(result, CODE_CONTROL_BITS)
     assert code_control_bits == 9
 
+# Testes de integração:
+# Todos os testes abaixo são de integração.
+
 def test_compressing_dynamic_code_lenght_set_right_code_lenght_16_bits():
     content = FileManager.ReadFile('tests/files/dynamic_input_16_bits.txt')
     compressor = LZWCompressor(SIGMA_SIZE, CODE_CONTROL_BITS, DEFAULT_CODE_BITS, MAX_DYNAMIC_BITS, incrementableBits=True)

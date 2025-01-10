@@ -1,5 +1,4 @@
 import sys
-from pympler import asizeof
 
 SIGMA_SIZE = 2
 IS_WORD_FULL = "$"

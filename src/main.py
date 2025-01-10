@@ -7,8 +7,6 @@ from LZW.PlotStatistics import PlotStatistics
 import cProfile
 import subprocess
 import os
-import memray
-from memray import FileDestination
 
 # Constantes
 SIGMA_SIZE = 256                # Tamanho do alfabeto utilizado
@@ -39,11 +37,9 @@ class AnalysisType(Enum):
 
     NONE: Nenhuma análise de desempenho.
     CPROGILE: Análise utilizando cProfile.
-    MEMRAY: Análise utilizando Memray.
     """
     NONE = "None"
     CPROFILE = "cProfile"
-    MEMRAY = "memray"
 
     def __str__(self):
         return self.value
@@ -141,17 +137,5 @@ if __name__ == "__main__":
         
         subprocess.run(["python3", os.path.join(analysis_folder, "analyze_profile.py")])
         
-    elif args.analysis == AnalysisType.MEMRAY:
-        analysis_folder = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "Analysis")
-
-        if not os.path.exists(analysis_folder):
-            os.makedirs(analysis_folder)
-            
-        memray_output_file = os.path.join(analysis_folder, "memray_output.bin")
-        if os.path.exists(memray_output_file):
-            os.remove(memray_output_file)
-        with memray.Tracker(destination=FileDestination(memray_output_file)) as tracker:
-            main()
-
     else:
         main()

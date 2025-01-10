@@ -24,7 +24,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: '3.10' # Versão do Python usada para todos os testes
+          python-version: '3.10'
 
       - name: Install dependencies
         run: |
@@ -36,7 +36,6 @@ jobs:
           pytest --cov --cov-report=xml --cov-fail-under=70
 
       - name: Upload coverage reports to Codecov
-        if: ${{ matrix.os == 'ubuntu-latest' }} # Dispara o Codecov apenas após os testes em Ubuntu
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}

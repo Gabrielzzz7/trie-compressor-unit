@@ -16,7 +16,6 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        python-version: [3.8, 3.9, 3.10] # Pode ajustar as versões conforme necessário
 
     steps:
       - name: Check out the code
@@ -25,7 +24,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v4
         with:
-          python-version: ${{ matrix.python-version }}
+          python-version: '3.10' # Versão do Python usada para todos os testes
 
       - name: Install dependencies
         run: |
@@ -34,16 +33,10 @@ jobs:
 
       - name: Run tests with coverage check
         run: |
-          pytest --cov --cov-report=html --cov-report=xml --cov-fail-under=70
+          pytest --cov --cov-report=xml --cov-fail-under=70
 
       - name: Upload coverage reports to Codecov
+        if: ${{ matrix.os == 'ubuntu-latest' }} # Dispara o Codecov apenas após os testes em Ubuntu
         uses: codecov/codecov-action@v5
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
-
-      - name: Upload HTML coverage report as artifact
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
-          name: html-coverage-report
-          path: htmlcov/

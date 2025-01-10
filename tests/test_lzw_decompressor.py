@@ -56,6 +56,9 @@ def test_compressing_and_decompressing_only_dots():
 
     assert content == decompressedContent
 
+# Testes de integração:
+# Todos os testes abaixo são de integração.
+
 def test_decompressor_with_enabled_statatistics():
     compressor = LZWCompressor(SIGMA_SIZE, CODE_CONTROL_BITS, DEFAULT_CODE_BITS, DEFAULT_CODE_BITS)
     content = "Em Algoritmos II \n , falhar nos testes não é o fim"

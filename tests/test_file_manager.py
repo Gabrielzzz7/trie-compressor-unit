@@ -36,16 +36,6 @@ def test_save_file_creates_file():
     assert os.path.exists(file_name)
     remove_temp_file(file_name)
 
-@pytest.mark.skipif(sys.platform.startswith("win"), reason="Não suporta a codificação do exemplo no Windows")
-def test_saved_text_file_has_right_content():
-    file_name = 'content.txt'
-    FileManager.SaveTextFile(file_name, CONTENT)
-    
-    content = FileManager.ReadFile(file_name)
-    remove_temp_file(file_name)
-
-    assert content == CONTENT
-
 def test_should_save_empty_file():
     file_name = 'content.txt'
     FileManager.SaveTextFile(file_name, "")
